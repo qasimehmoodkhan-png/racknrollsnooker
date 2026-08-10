@@ -13,7 +13,7 @@ import {
   initializeDefaultPricing
 } from '../lib/firestore';
 
-const ADMIN_PASSCODE = 'Admin2026!';
+const ADMIN_PASSCODE = '1234';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
