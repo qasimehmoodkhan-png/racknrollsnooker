@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #050505;
+  --color-void-light: #0a0a0a;
+  --color-void-lighter: #111111;
+  --color-gold: #C5A059;
+  --color-gold-light: #D4B76A;
+  --color-gold-dark: #A88944;
+  --color-baize: #0F2D1A;
+  --color-baize-light: #163D24;
+  --color-silver: #C0C0C0;
+  --color-platinum: #E5E4E2;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', 'Montserrat', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', 'Montserrat', sans-serif;
+  background-color: #050505;
+  color: #e0e0e0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
+/* Prevent horizontal scroll on mobile */
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Fade-up animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(197, 160, 89, 0.3); }
+  50% { border-color: rgba(197, 160, 89, 0.8); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+  50% { box-shadow: 0 0 20px 5px rgba(197, 160, 89, 0.2); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(197,160,89,0.15), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 3s ease-in-out infinite;
+}
+
+/* Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-nav {
+  background: rgba(5, 5, 5, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+/* Gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C5A059, #E8D5A3, #C5A059);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Masonry grid */
+.masonry-grid {
+  columns: 3;
+  column-gap: 1.5rem;
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive masonry */
+@media (max-width: 640px) {
+  .masonry-grid {
+    columns: 1;
+  }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+  .masonry-grid {
+    columns: 2;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce padding on mobile */
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* Ensure touch targets are large enough */
+  button, a {
+    min-height: 44px;
+  }
+  
+  /* Fix parallax on mobile (disable for performance) */
+  .bg-fixed {
+    background-attachment: scroll !important;
+  }
+}
+
+/* Improve touch scrolling */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Image optimization - ensure images load progressively */
+img {
+  content-visibility: auto;
+}
+
+/* Focus styles for accessibility */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #C5A059;
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(197, 160, 89, 0.3);
+  color: #ffffff;
+}
