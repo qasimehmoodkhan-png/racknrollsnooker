@@ -169,11 +169,13 @@ function TierCard({ tier, index, dynamicPrice }: { tier: Tier; index: number; dy
 export default function Membership() {
   const { ref: headerRef, isInView: headerInView } = useInView();
   const [pricing, setPricing] = useState<Pricing[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = subscribePricing((data) => {
-      const membershipPricing = data.filter(p => p.category === 'membership' && p.isActive);
+      const membershipPricing = (data ?? []).filter((p) => p.category === 'membership' && p.isActive);
       setPricing(membershipPricing);
+      setIsLoading(false);
     });
 
     return () => unsubscribe();
@@ -220,16 +222,33 @@ export default function Membership() {
         </div>
 
         {/* Tier Cards */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {defaultTiers.map((tier, i) => (
-            <TierCard 
-              key={tier.tier} 
-              tier={tier} 
-              index={i} 
-              dynamicPrice={getDynamicPrice(tier.tier)}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {defaultTiers.map((tier, i) => (
+              <div key={tier.tier} className="animate-pulse rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 lg:p-10 h-[420px]">
+                <div className="h-6 w-20 bg-white/10 rounded mb-6" />
+                <div className="h-10 w-36 bg-white/10 rounded mb-4" />
+                <div className="h-12 w-28 bg-white/10 rounded mb-8" />
+                <div className="space-y-3">
+                  <div className="h-4 w-full bg-white/10 rounded" />
+                  <div className="h-4 w-5/6 bg-white/10 rounded" />
+                  <div className="h-4 w-4/5 bg-white/10 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {defaultTiers.map((tier, i) => (
+              <TierCard 
+                key={tier.tier} 
+                tier={tier} 
+                index={i} 
+                dynamicPrice={getDynamicPrice(tier.tier)}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

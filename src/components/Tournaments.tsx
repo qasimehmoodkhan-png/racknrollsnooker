@@ -11,8 +11,7 @@ export default function Tournaments() {
 
   useEffect(() => {
     const unsubscribe = subscribeTournaments((data) => {
-      // Filter to show only upcoming and ongoing tournaments
-      const activeTournaments = data.filter(t => t.status === 'upcoming' || t.status === 'ongoing');
+      const activeTournaments = (data ?? []).filter((t) => t.status === 'upcoming' || t.status === 'ongoing');
       setTournaments(activeTournaments);
       setLoading(false);
     });
