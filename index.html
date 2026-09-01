@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
-  <body>
+  <body style="opacity:1;visibility:visible;">
     <div id="root">
       <main style="background:#050505;color:#f5f5f5;font-family:Inter,Arial,sans-serif;min-height:100vh;padding:48px 20px;">
         <section style="max-width:1200px;margin:0 auto;">
@@ -100,6 +100,48 @@
         </section>
       </main>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.style.opacity = '1';
+        document.body.style.visibility = 'visible';
+      });
+
+      window.addEventListener('load', function () {
+        const firebaseConfig = {
+          apiKey: 'AIzaSyB-nx2z9fcldYCFQM65YqbQTZFeRtUzEjE',
+          authDomain: 'rack-and-roll-snooker.firebaseapp.com',
+          databaseURL: 'https://rack-and-roll-snooker-default-rtdb.firebaseio.com',
+          projectId: 'rack-and-roll-snooker',
+          storageBucket: 'rack-and-roll-snooker.firebasestorage.app',
+          messagingSenderId: '413263170047',
+          appId: '1:413263170047:web:dc045850eff0d323383fca',
+          measurementId: 'G-V2K30302VF'
+        };
+
+        try {
+          if (window.firebase && !window.firebase.apps.length) {
+            window.firebase.initializeApp(firebaseConfig);
+          }
+
+          setTimeout(function () {
+            var refs = [
+              document.getElementById('target'),
+              document.getElementById('pricing-target'),
+              document.querySelector('[data-firebase-target]')
+            ];
+            refs.forEach(function (el) {
+              if (el && el.style) {
+                el.style.opacity = '1';
+              }
+            });
+          }, 2000);
+        } catch (error) {
+          console.warn('Firebase listener failed to initialize; static content remains visible.', error);
+        }
+      });
+    </script>
     <script src="/firebase-config.js"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>

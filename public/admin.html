@@ -44,19 +44,38 @@
       <div class="app-spinner" aria-hidden="true"></div>
     </div>
     <div id="root"></div>
-    <script>
-      (() => {
-        const loader = document.getElementById('app-loading');
-        const dismiss = () => {
-          if (!loader) return;
-          loader.style.opacity = '0';
-          loader.style.transition = 'opacity 220ms ease';
-          setTimeout(() => loader.remove(), 240);
-        };
 
-        window.__RNR_ADMIN_READY__ = dismiss;
-        setTimeout(dismiss, 1500);
-      })();
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        document.body.style.visibility = 'visible';
+        document.body.style.opacity = '1';
+
+        setTimeout(function () {
+          const nodes = document.querySelectorAll('[id*="loader"], [class*="loader"], [id*="spinner"], [class*="spinner"], [id*="loading"], [class*="loading"]');
+          nodes.forEach(function (node) {
+            if (node && node.style) {
+              node.style.display = 'none !important';
+            }
+          });
+        }, 500);
+      });
+
+      const firebaseConfig = {
+        apiKey: 'AIzaSyB-nx2z9fcldYCFQM65YqbQTZFeRtUzEjE',
+        authDomain: 'rack-and-roll-snooker.firebaseapp.com',
+        databaseURL: 'https://rack-and-roll-snooker-default-rtdb.firebaseio.com',
+        projectId: 'rack-and-roll-snooker',
+        storageBucket: 'rack-and-roll-snooker.firebasestorage.app',
+        messagingSenderId: '413263170047',
+        appId: '1:413263170047:web:dc045850eff0d323383fca',
+        measurementId: 'G-V2K30302VF'
+      };
+
+      if (window.firebase && !window.firebase.apps.length) {
+        window.firebase.initializeApp(firebaseConfig);
+      }
     </script>
     <script src="/firebase-config.js"></script>
     <script type="module" src="/src/admin.tsx"></script>
