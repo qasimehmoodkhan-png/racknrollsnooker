@@ -44,6 +44,20 @@
       <div class="app-spinner" aria-hidden="true"></div>
     </div>
     <div id="root"></div>
+    <script>
+      (() => {
+        const loader = document.getElementById('app-loading');
+        const dismiss = () => {
+          if (!loader) return;
+          loader.style.opacity = '0';
+          loader.style.transition = 'opacity 220ms ease';
+          setTimeout(() => loader.remove(), 240);
+        };
+
+        window.__RNR_ADMIN_READY__ = dismiss;
+        setTimeout(dismiss, 3000);
+      })();
+    </script>
     <script src="/firebase-config.js"></script>
     <script type="module" src="/src/admin.tsx"></script>
   </body>

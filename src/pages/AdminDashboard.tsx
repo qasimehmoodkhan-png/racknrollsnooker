@@ -19,6 +19,7 @@ export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
   const [passcodeError, setPasscodeError] = useState('');
+  const [firebaseBootReady, setFirebaseBootReady] = useState(false);
   
   const [activeTab, setActiveTab] = useState<'tournaments' | 'pricing'>('tournaments');
   
@@ -48,6 +49,14 @@ export default function AdminDashboard() {
   
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: '', type: '' });
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setFirebaseBootReady(true);
+    }, 3000);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   // Subscribe to Firestore updates
   useEffect(() => {
@@ -225,12 +234,20 @@ export default function AdminDashboard() {
               <p className="text-[10px] text-gold/50 tracking-widest uppercase">Rack N Roll Management</p>
             </div>
           </div>
-          <a
-            href="/"
-            className="px-4 py-2 border border-gold/30 rounded-lg text-gold text-xs tracking-widest uppercase hover:bg-gold/10 transition-all"
-          >
-            View Site
-          </a>
+          <div className="flex items-center gap-3">
+            {!firebaseBootReady && (
+              <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-gold">
+                <span className="h-2 w-2 rounded-full bg-gold animate-pulse" />
+                Syncing
+              </div>
+            )}
+            <a
+              href="/"
+              className="px-4 py-2 border border-gold/30 rounded-lg text-gold text-xs tracking-widest uppercase hover:bg-gold/10 transition-all"
+            >
+              View Site
+            </a>
+          </div>
         </div>
       </header>
 
