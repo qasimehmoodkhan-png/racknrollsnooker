@@ -1,14 +1,50 @@
-﻿
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
     <title>Rack N Roll Admin</title>
+    <style>
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        background: #050505;
+        color: #ffffff;
+        font-family: Inter, sans-serif;
+      }
+      body {
+        background: #050505;
+        color: #ffffff;
+      }
+      #app-loading {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle at center, rgba(197, 160, 89, 0.15), rgba(5, 5, 5, 1));
+        color: #fff;
+      }
+      .app-spinner {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 2px solid rgba(197, 160, 89, 0.25);
+        border-top-color: #C5A059;
+        animation: admin-spin 0.9s linear infinite;
+        box-shadow: 0 0 30px rgba(197, 160, 89, 0.2);
+      }
+      @keyframes admin-spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
+    <div id="app-loading" aria-live="polite" aria-label="Loading admin dashboard">
+      <div class="app-spinner" aria-hidden="true"></div>
+    </div>
     <div id="root"></div>
     <script src="/firebase-config.js"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/admin.tsx"></script>
   </body>
 </html>
