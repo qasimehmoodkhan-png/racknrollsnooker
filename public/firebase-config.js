@@ -1,6 +1,7 @@
 window.__RACK_N_ROLL_FIREBASE_CONFIG__ = {
   apiKey: 'AIzaSyB-nx2z9fcldYCFQM65YqbQTZFeRtUzEjE',
   authDomain: 'rack-and-roll-snooker.firebaseapp.com',
+  databaseURL: 'https://rack-and-roll-snooker-default-rtdb.firebaseio.com',
   projectId: 'rack-and-roll-snooker',
   storageBucket: 'rack-and-roll-snooker.firebasestorage.app',
   messagingSenderId: '413263170047',

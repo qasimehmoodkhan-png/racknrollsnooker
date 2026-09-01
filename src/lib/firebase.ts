@@ -1,9 +1,11 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
 import { getFirestore } from 'firebase/firestore';
 
 const defaultFirebaseConfig = {
   apiKey: 'AIzaSyB-nx2z9fcldYCFQM65YqbQTZFeRtUzEjE',
   authDomain: 'rack-and-roll-snooker.firebaseapp.com',
+  databaseURL: 'https://rack-and-roll-snooker-default-rtdb.firebaseio.com',
   projectId: 'rack-and-roll-snooker',
   storageBucket: 'rack-and-roll-snooker.firebasestorage.app',
   messagingSenderId: '413263170047',
@@ -32,6 +34,15 @@ export const db = (() => {
     return getFirestore(app);
   } catch (error) {
     console.warn('Firebase Firestore failed to initialize.', error);
+    return null;
+  }
+})();
+
+export const database = (() => {
+  try {
+    return getDatabase(app);
+  } catch (error) {
+    console.warn('Firebase Realtime Database failed to initialize.', error);
     return null;
   }
 })();
